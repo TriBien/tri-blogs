@@ -1,0 +1,38 @@
+<div class="contact-page">
+    <h1>Contact Tri</h1>
+    <p>I'm always open to discussing new projects, creative ideas or opportunities to be part of your visions.</p>
+
+    <form @submit.prevent="handleSubmit" class="contact-form">
+      <div class="form-group">
+        <label for="name">Name:</label>
+        <input type="text" id="name" v-model="form.name" required>
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email:</label>
+        <input type="email" id="email" v-model="form.email" required>
+      </div>
+
+      <div class="form-group">
+        <label for="subject">Subject:</label>
+        <input type="text" id="subject" v-model="form.subject" required>
+      </div>
+
+      <div class="form-group">
+        <label for="message">Message:</label>
+        <textarea id="message" v-model="form.message" required></textarea>
+      </div>
+
+      <button type="submit" :disabled="isSubmitting">
+        Send Message
+      </button>
+    </form>
+
+    <!-- <div class="social-links">
+      <h2>Connect with me</h2>
+      <ul>
+        <li><a href="https://github.com/TriBien" target="_blank">GitHub</a></li>
+        <li><a href="https://www.linkedin.com/in/tribien/" target="_blank">LinkedIn</a></li>
+      </ul>
+    </div> -->
+</div>
