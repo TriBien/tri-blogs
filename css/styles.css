@@ -138,23 +138,33 @@ footer .footer-nav {
   }
 
 /* ArticleList.css */
-  .articles-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1rem;
-  }
-  
-  .article-card {
-    border: 1px solid #ccc;
-    padding: 1rem;
-  }
-  
-  .pagination {
-    margin-top: 1rem;
-    display: flex;
-    justify-content: center;
-  }
-  
-  .pagination button {
-    margin: 0 0.5rem;
-  }
+#articles-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+
+.article-card {
+  /* border: 1px solid #ccc; */
+  padding: 1rem;
+  text-align: left;
+}
+
+.article-card img {
+  max-width: 100%;
+  height: auto;
+}
+
+.article-card h2 {
+  margin-top: 1rem;
+}
+
+#articles-pagination {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: center;
+}
+
+#articles-pagination button {
+  margin: 0 0.5rem;
+}
