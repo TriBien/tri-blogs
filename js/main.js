@@ -1,3 +1,6 @@
+// Declare the variables in the global scope
+let articles, perPage, totalPages;
+
 
 async function loadPage(pageName) {
     if (pageName === '/') {
@@ -13,27 +16,19 @@ async function loadPage(pageName) {
     document.getElementById('content').innerHTML = content;
 
     if (pageName === 'articles') {
-        const articlesResponse = await fetch('/static/articles.json');
-        const articles = await articlesResponse.json();
-        const perPage = 6;
-        const totalPages = Math.ceil(articles.length / perPage);
-
-        console.log("Total articles: " + articles.length);
-        console.log("Total pages: " + totalPages);
-
-        loadArticlesPage(1, perPage, totalPages, articles);
+        loadArticlesPage(1);
     }
 };
 
-const loadArticlesPage = async (currentPage, perPage, articles) => {
+const loadArticlesPage = async (currentPage) => {
     // Render articles list
-    loadArticles(currentPage, perPage, articles);
+    loadArticles(currentPage);
 
     // Update pagination links
-    loadPagination(currentPage, totalPages);
+    loadPagination(currentPage);
 };
 
-const loadPagination = async (currentPage, totalPages) => {
+const loadPagination = async (currentPage) => {
     const paginationContainer = document.getElementById('articles-pagination');
     let paginationHTML = '';
     for (let i = 1; i <= totalPages; i++) {
@@ -42,11 +37,12 @@ const loadPagination = async (currentPage, totalPages) => {
     paginationContainer.innerHTML = paginationHTML;
 }
 
-const loadArticles = async (currentPage, perPage, articles) => {
+const loadArticles = async (currentPage) => {
     const start = (currentPage - 1) * perPage;
     const end = start + perPage;
     const displayedArticles = articles.slice(start, end);
 
+    console.log("Displayed articles: " + displayedArticles.length);
     const articlesContainer = document.getElementById('articles-grid');
     let articlesHTML = '';
     displayedArticles.forEach(article => {
@@ -96,6 +92,14 @@ const registerBrowserBackAndForth = () => {
 }
 
 // start the app
-(function bootup(){
+(async function bootup(){
     registerBrowserBackAndForth();
+
+    const articlesResponse = await fetch('/static/articles.json');
+    articles = await articlesResponse.json();
+    perPage = 6;
+    totalPages = Math.ceil(articles.length / perPage);
+
+    console.log("Total articles: " + articles.length);
+    console.log("Total pages: " + totalPages);
 })();
